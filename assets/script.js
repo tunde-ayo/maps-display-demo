@@ -38,11 +38,11 @@ function initialiseMap() {
     // The actual map object
     map = new google.maps.Map(document.getElementById('medical-map'), mapOptions); // Create the map element
 
-    if(!isIE()){
+    // if(!isIE()){
         google.maps.event.addDomListener(window, 'resize', function() {
             map.fitBounds(bounds);
         });
-    }
+    // }
 }
 
 function loadMarkers(locations) {
@@ -82,14 +82,14 @@ function loadMarkers(locations) {
         });
 
         // Only showing an area covered with markers
-        if(!isIE()) {
+        // if(!isIE()) {
             bounds = new google.maps.LatLngBounds();
             
                 for (var i = 0; i < markers.length; i++) {
                     bounds.extend(markers[i].getPosition());
                 }
                 map.fitBounds(bounds);
-        }
+        // }
     });
 }
 
