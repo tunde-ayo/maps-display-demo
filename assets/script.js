@@ -38,7 +38,7 @@ function initialiseMap() {
     // The actual map object
     map = new google.maps.Map(document.getElementById('medical-map'), mapOptions); // Create the map element
 
-     if(!isIE()){
+     if(!isIE() != 9){
         google.maps.event.addDomListener(window, 'resize', function() {
             map.fitBounds(bounds);
         });
@@ -82,7 +82,7 @@ function loadMarkers(locations) {
         });
 
         // Only showing an area covered with markers
-         if(!isIE()) {
+         if(isIE() != 9) {
             bounds = new google.maps.LatLngBounds();
             
                 for (var i = 0; i < markers.length; i++) {
@@ -118,8 +118,6 @@ function createInfoWindow(name, address, region, extraInfo) {
 }
 
 function isIE() {
-    ua = navigator.userAgent;
-    /* MSIE used to detect old browsers and Trident used to newer ones*/
-    var is_ie = ua.indexOf("MSIE ") > -1 || ua.indexOf("Trident/") > -1;
-    return is_ie; 
+    var myNav = navigator.userAgent.toLowerCase();
+    return (myNav.indexOf('msie') != -1 ) ? parseInt(myNav.split('msie')[1]) : false
 }
