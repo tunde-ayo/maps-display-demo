@@ -56,6 +56,7 @@ function loadMarkers(locations) {
         var retExtraInfo = location.ExtraInfo;
         var retLatitude = parseFloat(location.Lat);
         var retLongitude = parseFloat(location.Long);
+        var retPhoneNumber = location.PhoneNumber;
 
         // Place the markers
         var marker = new google.maps.Marker({
@@ -72,7 +73,7 @@ function loadMarkers(locations) {
                 infoWindow.close(); // Close infowindow
             }
 
-            var iwContent = createInfoWindow(retName, retAddress, retRegion, retExtraInfo);
+            var iwContent = createInfoWindow(retName, retAddress, retRegion, retExtraInfo, retPhoneNumber);
 
             infoWindow = new google.maps.InfoWindow({
                 content: iwContent // Populate infoWindow contents
@@ -93,7 +94,7 @@ function loadMarkers(locations) {
     });
 }
 
-function createInfoWindow(name, address, region, extraInfo) {
+function createInfoWindow(name, address, region, extraInfo, phoneNumber) {
     var iwContent = "";
     // Initialise iwContent with standard data
     iwContent = "<div class=\"infoWindow\">";
@@ -111,6 +112,10 @@ function createInfoWindow(name, address, region, extraInfo) {
 
     if(extraInfo){
         iwContent+= "<p>Extra Information: " + extraInfo + "</p>"; // Add extra info
+    }
+
+    if(phoneNumber){
+        iwContent += "<p>Phone: <a href=\"tel:" + phoneNumber + "\">" + phoneNumber + "</a></p>"
     }
 
     iwContent+= "</div>";
